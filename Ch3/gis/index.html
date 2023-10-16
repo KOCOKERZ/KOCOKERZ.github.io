@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas Akbar</title>
+</head>
+<body>
+
+    <style>
+        .akbaropenlayer{
+          padding: 10px;
+          margin: 10px;
+          border: 1px solid black;
+          border: transparent;
+          width: 200px;
+          background-color:  black;
+          color: white;
+          border-radius: 30px;
+          text-align: center;
+        }
+        .akbaropenlayer:hover{
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid black;
+            border: transparent;
+            width: 200px;
+            background-color: gray;
+            color: white;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.5);
+        }
+        .akbaropenlayer a{
+          color: white;
+          text-decoration: none;
+        }
+      </style>
+
+    <h1 class="judul" style="text-align: center;">Cipondoh Map</h1>
+    <h2>Nama : Fitrah Ali Akbar Setiawan</h2>
+    <h2>NPM : 1214085</h2>
+    <h2>Kelas : D4TI 3C</h2>
+
+    <div id="map" style="height: 500px;"></div>
+    
+    <br>
+
+    <div class="akbaropenlayer">
+        <a href="../index.html">Google Cloud JSON</a>
+    </div>
+
+    <div id="data-table">
+    <div class="point-table">
+    <h1>Point</h1>
+    <table id="pointTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div class="polygon-table">
+    <h1>Polygon</h1>
+    <table id="polygonTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div class="polyline-table">
+    <h1>Polyline</h1>
+    <table id="polylineTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.js"></script>
+
+    <script type="module" src="./app.js"></script>
+    
+</body>
+</html>
