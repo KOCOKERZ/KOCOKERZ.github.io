@@ -7,17 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce Tailwind</title>
 
-    <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./public/images/favicon/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="./public/assets/css/main.css">
+    <link rel="stylesheet" href="./public/css/main.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
 </head>
 
 <body>
@@ -25,7 +24,7 @@
     <header class="py-4 shadow-sm bg-white">
         <div class="container flex items-center justify-between">
             <a href="index.html">
-                <img src="public/assets/images/logo.svg" alt="Logo" class="w-32">
+                <img src="./public/images/logo.svg" alt="Logo" class="w-32">
             </a>
 
             <div class="w-full max-w-xl relative flex">
@@ -48,8 +47,8 @@
             <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
                 <div class="flex items-center space-x-6 capitalize">
                     <a href="index.html" class="text-gray-200 hover:text-white transition">Home</a>
-                    <a href="#login" class="text-gray-200 hover:text-white transition">Login</a>
-                    <a href="#register" class="text-gray-200 hover:text-white transition">Register</a>
+                    <a href="#form-login" class="text-gray-200 hover:text-white transition">Login</a>
+                    <a href="#form-register" class="text-gray-200 hover:text-white transition">Register</a>
                 </div>
             </div>
         </div>
@@ -57,7 +56,7 @@
     <!-- ./navbar -->
 
     <!-- banner -->
-    <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('./public/assets/images/banner-bg.jpg');">
+    <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('./public/images/banner-bg.jpg');">
         <div class="container">
             <h1 class="text-6xl text-gray-800 font-medium mb-4 capitalize">
                 best collection for <br> home decoration
@@ -74,32 +73,36 @@
     <!-- ./banner -->
 
     <!-- LOGIN -->
-    <div id="login" class="contain py-16">
+    <div id="form-login" class="contain py-16">
         <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
             <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
             <p class="text-gray-600 mb-6 text-sm">
                 welcome back customer
             </p>
-            <form action="#" method="post" autocomplete="off">
+            <form id="loginForm">
                 <div class="space-y-2">
                     <div>
-                        <label for="email" class="text-gray-600 mb-2 block">Email address</label>
-                        <input type="email" name="email" id="email"
+                        <label for="username" class="text-gray-600 mb-2 block">Email address</label>
+                        <input type="username" name="username" id="usernameLogin"
                             class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                            placeholder="youremail.@domain.com">
+                            placeholder="your username">
                     </div>
                     <div>
                         <label for="password" class="text-gray-600 mb-2 block">Password</label>
-                        <input type="password" name="password" id="password"
+                        <input type="password" name="password" id="passwordLogin"
                             class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                             placeholder="*******">
                     </div>
                 </div>
                 <div class="mt-4">
-                    <button type="submit"
+                    <button type="submit" id="button" onclick="PostSignUp()"
                         class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">Login</button>
                 </div>
             </form>
+                
+                <div class="container">
+                    <div class="notification is-primary" id="surat"></div>
+                   </div>
 
             <p class="mt-4 text-center text-gray-600">Don't have account? <a href="#register"
                     class="text-primary">Register
@@ -108,36 +111,32 @@
     </div>
     <!-- ./LOGIN -->
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <!-- REGISTER -->
-    <div id="register" class="contain py-16">
+    <div id="form-register" class="contain py-16">
         <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
             <h2 class="text-2xl uppercase font-medium mb-1">Create an account</h2>
             <p class="text-gray-600 mb-6 text-sm">
                 Register for new cosutumer
             </p>
-            <form action="#" method="post" autocomplete="off">
+            <form id="signupForm" method="post" autocomplete="off">
                 <div class="space-y-2">
                     <div>
-                        <label for="name" class="text-gray-600 mb-2 block">Full Name</label>
-                        <input type="text" name="name" id="name"
+                        <label for="username" class="text-gray-600 mb-2 block">Full Name</label>
+                        <input type="username" name="username" id="usernameSignup"
                             class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                            placeholder="fulan fulana">
-                    </div>
-                    <div>
-                        <label for="email" class="text-gray-600 mb-2 block">Email address</label>
-                        <input type="email" name="email" id="email"
-                            class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                            placeholder="youremail.@domain.com">
+                            placeholder="your username">
                     </div>
                     <div>
                         <label for="password" class="text-gray-600 mb-2 block">Password</label>
-                        <input type="password" name="password" id="password"
-                            class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                            placeholder="*******">
-                    </div>
-                    <div>
-                        <label for="confirm" class="text-gray-600 mb-2 block">Confirm password</label>
-                        <input type="password" name="confirm" id="confirm"
+                        <input type="password" name="password" id="passwordSignup"
                             class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                             placeholder="*******">
                     </div>
@@ -153,7 +152,15 @@
                     class="text-primary">Login now</a></p>
         </div>
     </div>
-    <!-- ./REGOSTER -->
+    <!-- REGiSTER -->
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <!-- copyright -->
     <div class="bg-gray-800 py-4">
@@ -162,6 +169,11 @@
         </div>
     </div>
     <!-- ./copyright -->
+
+    <script src="./public/js/signin.js"></script>
+    <script src="./public/js/signup.js"></script>
+    <script type="module" src="./public/js/post.js"></script>
+
 </body>
 
 </html>
