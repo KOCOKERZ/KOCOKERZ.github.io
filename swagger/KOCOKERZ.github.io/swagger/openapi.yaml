@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function - OpenAPI 3.0
+  description: >-
+    API - Fitrah Ali Akbar Setiawan
+  termsOfService: https://github.com/KOCOKERZ/KOCOKERZ.github.io/swagger
+  contact:
+    email: fitrahaliakbar@gmail.com
+  license:
+    name: Peda Package
+    url: https://pkg.go.dev/github.com/KOCOKERZ/BACKEND_GIS
+  version: 1.0.3
+externalDocs:
+  description: Repo GCF
+  url: https://github.com/UniStoreProject3/gcf/
+servers:
+  - url: https://us-central1-core-advice-401502.cloudfunctions.net
+tags:
+  - name: Registrasi
+    description: Membuat akun user dengan password terenkripsi
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://petapedia.github.io/gcf/get/ #yang ini blom diganti ====================================================================
+  - name: Login
+    description: Mendapatkan token menggunakan akun user yang telah dibuat
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://petapedia.github.io/gcf/post/ #yang ini blom diganti ====================================================================
+  - name: Geojson
+    description: Mengambil Geojson
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://petapedia.github.io/gcf/post/ #yang ini blom diganti ====================================================================
+paths:
+  /AmbilDataGeojson:
+    get:
+      tags:
+        - Geojson
+      summary: Ambil Data Geojson
+      description: Mengambil geojson dari mongodb
+      operationId: AmbilDataGeojson
+      requestBody:
+        content:
+          application/json:
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geojson'
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /MembuatUser:
+    post:
+      tags:
+        - Registrasi
+      summary: Registrasi User
+      description: Membuat akun user dengan password terenkripsi
+      operationId: MembuatUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /MembuatTokenUser:
+    post:
+      tags:
+        - Login
+      summary: Mendapatkan token untuk login
+      description: Masukkan username dan password yang telah didaftarkan
+      operationId: MembuatTokenUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameNPassword'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsernameNPassword'
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+components:
+  schemas:
+    Geojson:
+      type: object
+      properties:
+        type:
+          type: string
+        geometry:
+          type: object
+          properties:
+            type: 
+              type: string
+            coordinates: 
+              type: array
+        properties:
+          type: object
+          properties:
+            name:
+              type: string
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          example: ibrohim
+        password:
+          type: string
+          example: ibrohim
+        role:
+          type: string
+          example: user
+    UsernameNPassword:
+      type: object
+      properties:
+        username:
+          type: string
+          example: akbar
+        password:
+          type: string
+          example: akbar
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Auth'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuthResponse'
+  securitySchemes:
+    token:
+      type: apiKey
+      name: token
+      in: header
