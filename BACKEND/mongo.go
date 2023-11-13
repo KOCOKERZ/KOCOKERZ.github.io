@@ -107,3 +107,34 @@ func InsertUserdata(mongoenv *mongo.Database, collname, username, role, password
 	req.Role = role
 	return atdb.InsertOneDoc(mongoenv, collname, req)
 }
+
+func PostLineString(mongoconn *mongo.Database, collection string, commentdata GeoJsonLineString) interface{} {
+	return atdb.InsertOneDoc(mongoconn, collection, commentdata)
+}
+
+func PostLinestring(mongoconn *mongo.Database, collection string, linestringdata GeoJsonLineString) interface{} {
+	return atdb.InsertOneDoc(mongoconn, collection, linestringdata)
+}
+
+func GetByCoordinate(mongoconn *mongo.Database, collection string, linestringdata GeoJsonLineString) GeoJsonLineString {
+	filter := bson.M{"geometry.coordinates": linestringdata.Geometry.Coordinates}
+	return atdb.GetOneDoc[GeoJsonLineString](mongoconn, collection, filter)
+}
+
+func DeleteLinestring(mongoconn *mongo.Database, collection string, linestringdata GeoJsonLineString) interface{} {
+	filter := bson.M{"geometry.coordinates": linestringdata.Geometry.Coordinates}
+	return atdb.DeleteOneDoc(mongoconn, collection, filter)
+}
+
+func UpdatedLinestring(mongoconn *mongo.Database, collection string, filter bson.M, linestringdata GeoJsonLineString) interface{} {
+	filter = bson.M{"geometry.coordinates": linestringdata.Geometry.Coordinates}
+	return atdb.ReplaceOneDoc(mongoconn, collection, filter, linestringdata)
+}
+
+func PostPolygone(mongoconn *mongo.Database, collection string, polygonedata GeoJsonPolygon) interface{} {
+	return atdb.InsertOneDoc(mongoconn, collection, polygonedata)
+}
+
+func PostPoint(mongoconn *mongo.Database, collection string, pointdata GeometryPoint) interface{} {
+	return atdb.InsertOneDoc(mongoconn, collection, pointdata)
+}
