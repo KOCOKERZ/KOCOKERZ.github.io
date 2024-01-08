@@ -1,317 +1,87 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function - OpenAPI 3.0
+  title: DOKUMEN API GIS RAUL MAHYA - OpenAPI 3.0
   description: >-
     Jelaskan disini apa saja yang perlu dijelaskan
     termasuk informasi yang diperlukan untuk dinilai
     term of service isi dari link repo dari swagger ini
-  termsOfService: https://github.com/KOCOKERZ/KOCOKERZ.github.io/swagger
+  termsOfService: https://raulmahya123.github.io/sweggergis/
   contact:
-    email: fitrahaliakbar@gmail.com
+    email: raulmahya11@gmail.com
   license:
-    name: Peda Package
-    url: https://pkg.go.dev/github.com/KOCOKERZ/BACKEND_GIS
-  version: 1.0.3
+    name: Fancy Backend
+    url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
+  version: 1.0.11
 externalDocs:
   description: Repo GCF
-  url: https://github.com/UniStoreProject3/gcf/
+  url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
 servers:
-  - url: https://us-central1-core-advice-401502.cloudfunctions.net
+  - url: https://asia-southeast2-testlogin-366704.cloudfunctions.net
 tags:
-  - name: Geojson
-    description: Menambah dan Memanggil Geojson
+  - name: Create GIS
+    description: Data Geo Spasial
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://petapedia.github.io/gcf/post/ #yang ini blom diganti ====================================================================
-  - name: Registrasi
-    description: Membuat akun user dengan password terenkripsi
+      url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
+  - name: auth
+    description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://petapedia.github.io/gcf/get/ #yang ini blom diganti ====================================================================
-  - name: Login
-    description: Mendapatkan token menggunakan akun user yang telah dibuat
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://petapedia.github.io/gcf/post/ #yang ini blom diganti ====================================================================
-  - name: DeleteUser
-    description: Mendapatkan token menggunakan akun user yang telah dibuat
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://petapedia.github.io/gcf/post/ #yang ini blom diganti ====================================================================
+      url: https://pkg.go.dev/github.com/Fancypedia/fancybackenddd
+  - name: user
+    description: Get Token and Authorize
 paths:
-  /REGIS_GIS:
+  /createpostgisline-3:  # Penambahan endpoint Create GIS
     post:
       tags:
-        - Geojson
-      summary: Menambah Data Point Geojson
-      description: Menambah point geojson ke mongodb
-      operationId: MembuatGeojsonPoint
+        - Create GIS
+      summary: Create GIS Data
+      description: Add new GIS data
+      operationId: createGIS
       requestBody:
-        content:
-          application/json:
-           schema:
-              $ref: '#/components/schemas/Point'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Point'
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /REGIS_GIS-MembuatGeojsonPolyline:
-    post:
-      tags:
-        - Geojson
-      summary: Menambah Data Polyline Geojson
-      description: Menambah polyline geojson ke mongodb
-      operationId: MembuatGeojsonPolyline
-      requestBody:
-        content:
-          application/json:
-           schema:
-              $ref: '#/components/schemas/Polyline'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Polyline'
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /REGIS_GIS-MembuatGeojsonPolygon:
-    post:
-      tags:
-        - Geojson
-      summary: Menambah Data Polygon Geojson
-      description: Menambah polygon geojson ke mongodb
-      operationId: MembuatGeojsonPolygon
-      requestBody:
-        content:
-          application/json:
-           schema:
-              $ref: '#/components/schemas/Polygon'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Polygon'
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /REGIS_GIS-AmbilDataGeojson:
-    get:
-      tags:
-        - Geojson
-      summary: Ambil Data Geojson
-      description: Mengambil geojson dari mongodb
-      operationId: AmbilDataGeojson
-      requestBody:
-        content:
-          application/json:
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Geojson'
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /REGIS_GIS-RegistrasiUser:
-    post:
-      tags:
-        - Registrasi
-      summary: Registrasi User
-      description: Membuat akun user dengan password terenkripsi
-      operationId: MembuatUser
-      requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UsernameNPassword'
+              $ref: '#/components/schemas/Peta' # Gunakan skema yang sesuai di sini
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsernameNPassword'
+        '201':
+          description: Data successfully created
+        '400':
+          description: Invalid input or request body
       security:
-        - token:
+        - SECRET:
             - write:apiKey
-            - read:apiKey
-  /REGIS_GIS-LoginUser:
-    post:
-      tags:
-        - Login
-      summary: Mendapatkan token untuk login
-      description: Masukkan username dan password yang telah didaftarkan
-      operationId: MembuatTokenUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UsernameNPassword'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsernameNPassword'
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
-  /REGIS_GIS-HapusUser:
-    delete:
-      tags:
-        - DeleteUser
-      summary: Mendapatkan token untuk login
-      description: Masukkan username dan password yang telah didaftarkan
-      operationId: MembuatTokenUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UsernameOnly'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsernameOnly'
-      security:
-        - token:
-            - write:apiKey
-            - read:apiKey
+            - read:SECRET
+               
 components:
   schemas:
-    Geojson:
+    Peta:
       type: object
       properties:
         type:
           type: string
-        geometry:
-          type: object
-          properties:
-            type: 
-              type: string
-            coordinates: 
-              type: array
+          example: "Feature"
         properties:
           type: object
           properties:
             name:
               type: string
-    Point:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Feature
-        properties:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Contoh Point
+              example: "LOKASI"
         geometry:
           type: object
           properties:
-            type: 
+            type:
               type: string
-              example: Point
-            coordinates: 
+              example: "Point"
+            coordinates:
               type: array
-              example:  [103.62304801308028,-1.6286912230149255]
-    Polyline:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Feature
-        properties:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Contoh Polyline
-        geometry:
-          type: object
-          properties:
-            type: 
-              type: string
-              example: LineString
-            coordinates: 
-              type: array
-              example: [[103.62505530793163,-1.6288798067939751],[103.62395435305416,-1.6290723960335356],[103.62136160431874,-1.6280544241267023]]
-    Polygon:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Feature
-        properties:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Contoh Polygon
-        geometry:
-          type: object
-          properties:
-            type: 
-              type: string
-              example: Polygon
-            coordinates: 
-              type: array
-              example: [[[103.62266157176862,-1.6284887975001965],[103.62266157176862,-1.6285986746736683],[103.62284935445302,-1.6285986746736683],[103.62284935445302,-1.6284887975001965],[103.62266157176862,-1.6284887975001965]]]
-    UsernameNPassword:
-      type: object
-      properties:
-        username:
-          type: string
-          example: akbar
-        password:
-          type: string
-          example: akbar
-    UsernameOnly:
-      type: object
-      properties:
-        username:
-          type: string
-          example: akbar
-  requestBodies:
-    AuthReq:
-      description: Request Authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Auth'
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuthResponse'
+              items:
+                - type: array
+                  items:
+                    - [125.6, 10.1]
   securitySchemes:
-    token:
+    SECRET:
       type: apiKey
-      name: token
+      name: SECRET
       in: header
