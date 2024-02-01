@@ -1,4 +1,4 @@
-export let URLGeoJson = "https://us-central1-core-advice-401502.cloudfunctions.net/function-1";
+export let URLGeoJson = "https://us-central1-core-advice-401502.cloudfunctions.net/GIS-MAP";
 export let tableTag="tr";
 export let tableRowClass="content is-small";
 export let tableTemplate=`
